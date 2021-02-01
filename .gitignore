@@ -1,0 +1,7 @@
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.users
+*.txt
+*.obj
+BOJ/
+Debug/
