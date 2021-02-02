@@ -9,16 +9,16 @@ int main() {
 
     cin >> n >> k;
 
-    int coins[100];
+    int arr[100];
 
     for (int i = 0; i < n; i++)
-        cin >> coins[i];
+        cin >> arr[i];
 
     DP[0] = 1;
     for (int i = 0; i < n; i++)
-        for (int j = coins[i]; j <= k; j++)
-            if (j <= coins[i])
-                DP[j] += DP[j - coins[i]];
+        for (int j = arr[i]; j <= k; j++)
+            if (j <= arr[i])
+                DP[j] += DP[j - arr[i]];
 
     cout << DP[k] << endl;
 
