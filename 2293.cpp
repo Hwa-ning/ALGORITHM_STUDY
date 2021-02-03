@@ -17,7 +17,7 @@ int main() {
     DP[0] = 1;
     for (int i = 0; i < n; i++)
         for (int j = arr[i]; j <= k; j++)
-            if (j <= arr[i])
+            if (j - arr[i] >= 0)
                 DP[j] += DP[j - arr[i]];
 
     cout << DP[k] << endl;
