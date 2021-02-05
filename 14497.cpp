@@ -15,8 +15,7 @@ int move_x[4] = { 0,1,0,-1 };
 int move_y[4] = { 1,0,-1,0 };
 int solve(int level)
 {
-	for (int i = 0; i < 4; i++)
-	{
+	for (int i = 0; i < 4; i++) {
 		int next_x = j_x + move_x[i];
 		int next_y = j_y + move_y[i];
 		if(0<=next_x && next_x <w && 0 <= next_y && next_y <h )
