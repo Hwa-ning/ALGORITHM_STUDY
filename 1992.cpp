@@ -12,16 +12,13 @@ void dq(int x, int y, int length)
 		cout << arr[x][y];
 		return;
 	}
-
 	int start = arr[x][y];
-	bool is_same = true;
 	for (int i = x; i < x+length; i++)
 		for (int j = y; j < y+length; j++)
 		{
 			if (arr[i][j] != start)
 			{
 				cout << "(";
-				is_same = false;
 				int temp = length / 2;
 				dq(x, y, temp);
 				dq(x, y + temp, temp);
@@ -31,8 +28,7 @@ void dq(int x, int y, int length)
 				return;
 			}
 		}
-	if (is_same)
-		cout << start;
+	cout << start;
 }
 int main()
 {
