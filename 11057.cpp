@@ -11,7 +11,7 @@ int main()
 	
 	for (int i = 0; i < 10; i++)
 		DP[0][i] = 0;
-
+	                        
 	for (int i = 0; i < 10; i++)
 		DP[1][i] = 1;
 
