@@ -63,7 +63,7 @@ void solve3()
 					queue<pair<int, int> >q;
 					q.push({ j, i });
 					visited[i][j] = true;
-
+					// i,j 좌표의 방 갯수 구하는 bfs
 					int roomCount = 1;
 					while (!q.empty()) {
 						int x = q.front().first;
@@ -74,7 +74,7 @@ void solve3()
 							int nx = x + dx[l];
 							int ny = y + dy[l];
 
-							if (0 > nx || nx >= w || 0 > ny || ny >= h || visited[ny][nx] || room[ny][nx]!=room[y][x])
+							if (0 > nx || nx >= w || 0 > ny || ny >= h || visited[ny][nx] || room[ny][nx]!=room[y][x]) // 방번호가 다르다면
 								continue;
 
 							visited[ny][nx] = true;
@@ -82,6 +82,8 @@ void solve3()
 							roomCount++;
 						}
 					}
+
+					// Nx,Ny 좌표의 방 갯수 구하는 bfs
 					q.push({ Nx, Ny });
 					visited[Ny][Nx] = true;
 					roomCount++;
