@@ -14,6 +14,7 @@ int dx[4] = { 0,1,0,-1 }; //  0  1  2  3
 int dy[4] = { 1,0,-1,0 }; // ÇÏ ¿ì »ó ÁÂ
 
 // 210220 Åä ÆÀ¹ö
+
 void dfs(int x, int y)
 {
 	switch(map[y][x]) {
@@ -23,7 +24,7 @@ void dfs(int x, int y)
 	case '1':
 		if (!visited[y + 1][x]) {
 			visited[y + 1][x] = true;
-			dfs(x,y + 1);
+			dfs(x, y + 1);
 		}
 		if (!visited[y][x + 1]) {
 			visited[y][x + 1] = true;
@@ -43,7 +44,7 @@ void dfs(int x, int y)
 	case '3':
 		if (!visited[y - 1][x]) {
 			visited[y - 1][x] = true;
-			dfs(x,y - 1);
+			dfs(x, y - 1);
 		}
 		if (!visited[y][x - 1]) {
 			visited[y][x - 1] = true;

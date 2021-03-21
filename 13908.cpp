@@ -15,8 +15,7 @@ void solve(int length,int now)
 	}
 
 	for (int i = 0; i < 10; i++)
-		if (visited[i])
-		{
+		if (visited[i]){
 			visited[i] = false;
 			solve(length + 1, now + 1);
 			visited[i] = true;
