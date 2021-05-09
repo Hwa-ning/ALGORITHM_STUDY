@@ -13,6 +13,11 @@ struct Trie {
 		for (int i = 0; i < 10; i++)
 			this->nextNum[i] = NULL;
 	}
+	~Trie() {
+		for (int i = 0; i < 10; i++)
+			if (this->nextNum[i] != NULL)
+				delete nextNum[i];
+	}
 };
 
 int main()
@@ -31,7 +36,6 @@ int main()
 		}
 		sort(v.begin(), v.end());
 		bool Exit = false;
-
 		for (int i = 0; i < N; i++) {
 			Trie* now = root;
 			for (int j = 0; j < v[i].size(); j++) {
@@ -51,6 +55,8 @@ int main()
 			cout << "NO" << endl;
 		else
 			cout << "YES" << endl;
+
+		delete root;
 	}
 	return 0;
 }
