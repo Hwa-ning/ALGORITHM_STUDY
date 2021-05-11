@@ -66,7 +66,6 @@ y = index / 3 <br>
 | 7 | 8 | 6 |
 
 3 [2] , 0 [1] swap / 103425786 -> 130425786
-<<<<<<< HEAD
 
 ```C++
 #include <iostream>
