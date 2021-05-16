@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int N, M; // N : 세로 y , M : 가로 x
+int N, M;
 int passedTurns = 0;
 string map[101][101];
 string s_move;
@@ -64,7 +64,7 @@ struct hero {
 		this->EXP = 0; this->MAX_EXP = 5;
 		memset(accessory, false, sizeof(accessory));
 	}
-	void GainEXP(int exp) {
+	void GetEXP(int exp) {
 		if (accessory[3])
 			EXP += exp * 1.2;
 		else
@@ -77,7 +77,7 @@ struct hero {
 			CUR_HP += 5; REM_HP = CUR_HP;
 		}
 	}
-	void GainItem(int X, int Y) {
+	void GetItem(int X, int Y) {
 		string tempItem = map[Y][X];
 		int temp = 0;
 		for (int i = 1; i < tempItem.length(); i++) {
@@ -135,7 +135,7 @@ struct hero {
 					if(REM_HP > CUR_HP)
 						REM_HP = CUR_HP;
 				}
-				GainEXP(v_monster[temp].EXP);
+				GetEXP(v_monster[temp].EXP);
 				map[Y][X] = ".";
 				if (Y == bossLocation.first && X == bossLocation.second) {
 					map[Y][X] = "@";
@@ -144,11 +144,10 @@ struct hero {
 				return;
 			}
 
-			DMG = MON_ATT;
 			if (i == 0 && accessory[5] && Y == bossLocation.first && X == bossLocation.second)
 				continue;
 		
-			HERO_HP -= max(1,DMG-HERO_DEF);
+			HERO_HP -= max(1,MON_ATT-HERO_DEF);
 			if (HERO_HP <= 0) {
 				REM_HP = 0;
 				if (Y == bossLocation.first && X == bossLocation.second)
@@ -161,10 +160,7 @@ struct hero {
 		}
 	}
 	void FallTrap() {
-		if (accessory[4])
-			REM_HP -= 1;
-		else
-			REM_HP -= 5;
+		accessory[4] ? REM_HP -= 1 : REM_HP -= 5;
 
 		if (REM_HP <= 0) {
 			REM_HP = 0;
@@ -173,34 +169,30 @@ struct hero {
 	}
 	void MoveHero(char dir) {
 		passedTurns++;
-		int temp_x = x;
-		int temp_y = y;
+		int next_x = x;
+		int next_y = y;
 		switch (dir) {
-		case 'U': temp_y--; break;
-		case 'R': temp_x++; break;
-		case 'D': temp_y++; break;
-		case 'L': temp_x--; break;
+		case 'U': next_y--; break;
+		case 'R': next_x++; break;
+		case 'D': next_y++; break;
+		case 'L': next_x--; break;
 		}
-		if (1 > temp_x || temp_x > M || 1 > temp_y || temp_y > N || map[temp_y][temp_x][0] == '#') {
+		if (1 > next_x || next_x > M || 1 > next_y || next_y > N || map[next_y][next_x][0] == '#') {
 			if (map[y][x] == "^")
 				FallTrap();
 			return;
 		}
-		x = temp_x;
-		y = temp_y;
+		x = next_x;
+		y = next_y;
 		if (map[y][x][0] == 'B') {
-			GainItem(x, y);
+			GetItem(x, y);
 			map[y][x] = ".";
 		}
-		else if (map[y][x][0] == '^')
-			FallTrap();
-		else if (map[y][x][0] == '&' || map[y][x][0]=='M')
-			FightMonster(x, y);
-		else if (map[y][x][0] == '.')
-			return;
+		else if (map[y][x][0] == '^') FallTrap();
+		else if (map[y][x][0] == '&' || map[y][x][0]=='M') FightMonster(x, y);
 	}
 	void GameOver(string overText) {
-		if ( REM_HP == 0 && accessory[1]) {
+		if ( REM_HP == 0 && accessory[1]) { // RE 부활
 			accessory[1] = false;
 			REM_HP = CUR_HP;
 			y = firstLocation.first;
@@ -285,43 +277,3 @@ int main()
 	HERO.GameOver("Press any key to continue.");
 	return 0;
 }
-/*
-8 10
-M&&&&&&&&&
-&&&&&&&&&&
-@BBBBBBBB^
-..........
-..........
-..........
-..........
-..........
-RRRRRRRRRRURRRRRRRRRRRRRRRRRRRULLLLLLLLLLLLLLLLLLL
-1 1 100 10 10 1 10
-1 2 100 10 10 1 10
-1 3 107 10 10 1 10
-1 4 164 10 10 1 10
-1 5 145 10 10 1 10
-1 6 154 10 10 1 10
-1 7 176 10 10 1 10
-1 8 156 10 10 1 10
-1 9 138 10 10 1 10
-1 10 ac 100 100 100 10
-2 1 186 1 1 1 10
-2 2 186 1 1 1 10
-2 3 1 1 1 1 10
-2 4 1 1 1 1 10
-2 5 1 1 1 1 10
-2 6 1 1 1 1 10
-2 7 1 1 1 1 10
-2 8 1 1 1 1 10
-2 9 1 1 1 1 10
-2 10 1 1 1 1 10
-3 2 O CU
-3 3 O RE
-3 4 O CO
-3 5 O EX
-3 6 O DX
-3 7 O HU
-3 8 O CU
-3 9 O CU
-*/

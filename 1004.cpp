@@ -4,7 +4,7 @@ using namespace std;
 
 struct planet {
 	int x;
-	int y;
+	int y; // 여기주석담
 	int r;
 };
 int main()
