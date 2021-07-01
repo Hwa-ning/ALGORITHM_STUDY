@@ -49,7 +49,7 @@ void check() {
 }
 
 void move() {
-	check(); // 초기에 게임이 완료된 경우 확인
+	check(); // 초기에 게임이 바로 종료되는 경우 확인
 	for (int c = 0; c < com.length(); c++) {
 		if (clear)
 			break;
