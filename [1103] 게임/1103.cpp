@@ -39,10 +39,10 @@ int dfs(int y, int x)
 			int next_y = y + now * move_y[i];
 			int next_x = x + now * move_x[i];
 			 
-			if (next_y < 0 || h <= next_y || next_x < 0 || w <= next_x || map[next_y][next_x] == 'H') // map ¹üÀ§ ÃÊ°ú
+			if (next_y < 0 || h <= next_y || next_x < 0 || w <= next_x || map[next_y][next_x] == 'H') // map ë²”ìœ„ ì´ˆê³¼
 				continue;
 
-			DP[y][x] = max(DP[y][x], dfs(next_y, next_x)+1); // ÇöÀçÄ­°ú ny,nx ÁöÁ¡À» ºñ±³
+			DP[y][x] = max(DP[y][x], dfs(next_y, next_x)+1); // í˜„ìž¬ì¹¸ê³¼ ny,nx ì§€ì ì„ ë¹„êµ
 		}
 		visited[y][x] = false;
 	}
